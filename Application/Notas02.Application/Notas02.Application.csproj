@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
+    <PackageReference Include="FluentValidation" Version="7.5.2" />
+    <PackageReference Include="MediatR" Version="4.1.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="4.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Notas02.Application.EF\Notas02.Application.EF.csproj" />
+    <ProjectReference Include="..\Notas02.Application.Entities\Notas02.Application.Entities.csproj" />
+    <ProjectReference Include="..\Notas02.Application.Core\Notas02.Application.Core.csproj" />
+  </ItemGroup>
+
+</Project>
