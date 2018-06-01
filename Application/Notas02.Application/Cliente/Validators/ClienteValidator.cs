@@ -9,7 +9,6 @@ namespace Notas02.Application.Cliente.Validators
         {
             RuleFor(c => c.Nome)
                 .NotEmpty()
-                .NotNull()
                 .WithMessage("Nome é obrigatório.");
 
             RuleFor(c => c.Nome)

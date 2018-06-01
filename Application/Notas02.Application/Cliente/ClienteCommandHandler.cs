@@ -12,11 +12,11 @@ namespace Notas02.Application.Cliente
 {
     public class ClienteCommandHandler : IRequestHandler<RegistrarClienteCommand, Notas02Notification>
     {
-        private readonly INotas02Repository<Models.Cliente> _repository;
+        private readonly IWriteRepository<Models.Cliente> _writeRepository;
 
-        public ClienteCommandHandler(INotas02Repository<Models.Cliente> repository)
+        public ClienteCommandHandler(IWriteRepository<Models.Cliente> writeRepository)
         {
-            _repository = repository;
+            _writeRepository = writeRepository;
         }
 
         public Task<Notas02Notification> Handle(RegistrarClienteCommand command, CancellationToken cancellationToken)
@@ -25,7 +25,11 @@ namespace Notas02.Application.Cliente
             var result = validator.Validate(command);
             var notification = new Notas02Notification(true);
 
-            if (result.IsValid) return Task.FromResult(notification);
+            if (result.IsValid)
+            {
+                _writeRepository.Add(new Models.Cliente(command.Nome));
+                return Task.FromResult(notification);
+            }
 
             notification.Success = false;
             notification.Results = new Dictionary<string, string>();
@@ -34,6 +38,7 @@ namespace Notas02.Application.Cliente
             {
                 notification.Results.Add(err.PropertyName, err.ErrorMessage);
             }
+            
             return Task.FromResult(notification);
         }
     }

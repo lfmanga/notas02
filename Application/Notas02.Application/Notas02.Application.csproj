@@ -15,6 +15,7 @@
     <ProjectReference Include="..\Notas02.Application.EF\Notas02.Application.EF.csproj" />
     <ProjectReference Include="..\Notas02.Application.Entities\Notas02.Application.Entities.csproj" />
     <ProjectReference Include="..\Notas02.Application.Core\Notas02.Application.Core.csproj" />
+    <ProjectReference Include="..\Notas02.Application.Data.Dapper\Notas02.Application.Data.Dapper.csproj" />
   </ItemGroup>
 
 </Project>

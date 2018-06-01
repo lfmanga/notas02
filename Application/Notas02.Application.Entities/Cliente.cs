@@ -6,5 +6,15 @@ namespace Notas02.Application.Entities
     {
         public Guid Id { get; set; }
         public string Nome { get; set; }
+
+        public Cliente()
+        {
+            
+        }
+
+        public Cliente(string nome)
+        {
+            Nome = nome;
+        }
     }
 }
