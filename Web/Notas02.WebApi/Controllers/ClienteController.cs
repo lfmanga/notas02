@@ -29,9 +29,17 @@ namespace Notas02.WebApi.Controllers
         public IActionResult Post([FromBody]RegistrarClienteCommand cliente) => Ok(_mediator.Send(cliente).Result);
 
         [HttpPut("Guid:id")]
-        public IActionResult Put(Guid id, [FromBody] RegistrarClienteCommand cliente) => Ok();
+        public IActionResult Put(Guid id, [FromBody] EditarClienteCommand cliente)
+        {
+            cliente.Id = id;
+            return Ok(_mediator.Send(cliente).Result);
+        }
 
         [HttpDelete("Guid:id")]
-        public IActionResult Delete(Guid id) => Ok();
+        public IActionResult Delete(Guid id)
+        {
+            var command = new DeletarClienteCommand(id);
+            return Ok(_mediator.Send(command));
+        }
     }
 }

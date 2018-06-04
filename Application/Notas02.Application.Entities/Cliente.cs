@@ -12,8 +12,9 @@ namespace Notas02.Application.Entities
             
         }
 
-        public Cliente(string nome)
+        public Cliente(Guid id, string nome)
         {
+            Id = id;
             Nome = nome;
         }
     }

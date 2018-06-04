@@ -18,7 +18,8 @@ namespace Notas02.Application
             services.AddMediatR(assembly);
             services.AddScoped<Notas02Context>();
             services.AddScoped(typeof(INotas02Repository<>), typeof(Notas02Repository<>));
-            services.AddScoped(typeof(IReadRepository<>), typeof(DapperReadRepository<>));            
+            services.AddScoped(typeof(IReadRepository<>), typeof(DapperReadRepository<>));    
+            services.AddScoped(typeof(IWriteRepository<>), typeof(EFWriteRepository<>));                                
             return services;
         }
 
