@@ -1,0 +1,1 @@
+export const FETCH_ALL_CLIENTES = 'FETCH_ALL_CLIENTES'
