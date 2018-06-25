@@ -1,1 +1,2 @@
-export const FETCH_ALL_CLIENTES = 'FETCH_ALL_CLIENTES'
+export const FETCH_ALL = 'FETCH_ALL'
+export const FETCH_BY_ID = 'FETCH_BY_ID'

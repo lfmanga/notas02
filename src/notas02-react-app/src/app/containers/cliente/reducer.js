@@ -1,13 +1,16 @@
-import { FETCH_ALL_CLIENTES } from './actionsType'
+import { FETCH_ALL, FETCH_BY_ID } from './actionsType'
 
 const initialState = {
-    clientes: []
+    list: [],
+    model: {}
 }
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case FETCH_ALL_CLIENTES:
-            return Object.assign({}, state, { clientes: action.payload })
+        case FETCH_ALL:
+            return Object.assign({}, state, { list: action.payload })
+        case FETCH_BY_ID:
+            return Object.assign({}, state, { model: action.payload })
         default:
             return state;
     }

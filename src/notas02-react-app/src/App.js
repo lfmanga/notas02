@@ -8,7 +8,10 @@ import Routes from './app/routes'
 class Home extends Component {
   render() {
     return (
-      <h1>Home</h1>
+      <div>
+        <h1>Home</h1>
+        <a href="/cliente">Cliente</a>
+      </div>
     );
   }
 }

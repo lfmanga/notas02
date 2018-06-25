@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Router } from "react-router";
+import { Route } from "react-router";
 
 import Cliente from '../containers/cliente'
 
