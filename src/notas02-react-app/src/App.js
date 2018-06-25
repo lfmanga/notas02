@@ -5,6 +5,8 @@ import { Route, Router } from "react-router";
 
 import Routes from './app/routes'
 
+import Layout from './app/components/layout'
+
 class Home extends Component {
   render() {
     return (
@@ -34,13 +36,15 @@ class Lekinho extends Component {
 
 export default (props) => (
   <Provider store={props.store}>
-    <Router history={props.history}>
-      <div>
-        <Routes.ClienteRouter />
-        <Route exact path="/" component={Home} />
-        <Route path="/rogerio" component={Rogerio} />
-        <Route path="/lekinho" component={Lekinho} />
-      </div>
-    </Router>
+    <Layout>
+      <Router history={props.history}>
+        <div>
+          <Routes.ClienteRouter />
+          <Route exact path="/" component={Home} />
+          <Route path="/rogerio" component={Rogerio} />
+          <Route path="/lekinho" component={Lekinho} />
+        </div>
+      </Router>
+    </Layout>
   </Provider>
 )

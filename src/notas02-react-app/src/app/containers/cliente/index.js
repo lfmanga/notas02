@@ -1,11 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchAll, fetchById } from './actionsCreator'
+import { fetchAll, fetchFilter, fetchById } from './actionsCreator'
 import { bindActionCreators } from 'redux'
 
-import Table from '../../components/cliente/Table'
-import EditModal from '../../components/cliente/EditModal'
-import FormCliente from '../../components/cliente/FormCliente'
+import Content from '../../components/layout/content/cliente'
 
 class Cliente extends React.Component {
 
@@ -13,54 +11,34 @@ class Cliente extends React.Component {
         super(props)
         this.state = {
             list: [],
-            model: {},
-            isOpenEditModal: false
+            filterText: ''
         }
-        this.props.actions.fetchAll() //remover isso        
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState({ list: nextProps.list, model: nextProps.model ? nextProps.model : {} })
+        this.setState({ list: nextProps.list })
     }
-
-    handleClickListAll() {
-        this.props.actions.fetchAll()
-    }
-
-    handleClickEdit(id) {
-        this.props.actions.fetchById(id)
-        this.setState({ isOpenEditModal: true })
-    }
-
-    toggleEditModal() {
-        this.setState({ isOpenEditModal: !this.state.isOpenEditModal })
-    }
-
 
     render() {
-
-        const { model } = this.state
-
         return (
             <div className="container-fluid">
-                <h1>Hello Cliente</h1>
-                <button
-                    className="btn btn-primary"
-                    onClick={this.handleClickListAll.bind(this)}>
-                    listAll</button>
-                <Table
+                <Content
                     list={this.state.list}
-                    onClickEditButton={this.handleClickEdit.bind(this)} />
-                <EditModal
-                    isOpen={this.state.isOpenEditModal}
-                    toggle={this.toggleEditModal.bind(this)}
-                    model={model}>
-
-                <FormCliente />
-
-                </EditModal>
+                    onSearch={this.onSearch.bind(this)}
+                    filterText={this.state.filterText}
+                    onChangeFilterText={this.onChangeFilterText.bind(this)}
+                />
             </div>
         )
+    }
+
+    onChangeFilterText(filterText) {
+        this.setState({ filterText })
+    }
+
+    onSearch() {
+        if(this.state.filterText)  this.props.actions.fetchFilter(this.state.filterText)
+        else this.props.actions.fetchAll()
     }
 }
 
@@ -75,7 +53,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         actions: bindActionCreators({
             fetchAll: fetchAll,
-            fetchById: fetchById
+            fetchById: fetchById,
+            fetchFilter : fetchFilter
         }, dispatch)
     }
 }
