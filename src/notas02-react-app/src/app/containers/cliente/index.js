@@ -3,7 +3,13 @@ import { connect } from 'react-redux'
 import { fetchAll, fetchFilter, fetchById } from './actionsCreator'
 import { bindActionCreators } from 'redux'
 
-import Content from '../../components/layout/content/cliente'
+import Content from '../../components/layout/content'
+import Modal from '../../components/layout/modal'
+
+import Search from '../../components/cliente/search'
+import Table from '../../components/cliente/table'
+
+
 
 class Cliente extends React.Component {
 
@@ -11,7 +17,7 @@ class Cliente extends React.Component {
         super(props)
         this.state = {
             list: [],
-            filterText: ''
+            searchText: ''
         }
     }
 
@@ -22,23 +28,45 @@ class Cliente extends React.Component {
     render() {
         return (
             <div className="container-fluid">
-                <Content
-                    list={this.state.list}
-                    onSearch={this.onSearch.bind(this)}
-                    filterText={this.state.filterText}
-                    onChangeFilterText={this.onChangeFilterText.bind(this)}
-                />
+                <Content>
+                    <Search
+                        searchTitle="Search"
+                        searchText={this.state.searchText}
+                        handleSearch={this.handleSearch.bind(this)}
+                        handleSearchTextChanged={this.handleSearchTextChanged.bind(this)}
+                    />
+
+                    <div className="container-fluid">
+                        <div className="card">
+                            <div className="card-header">
+                                <h5>Result</h5>
+                            </div>
+                            <div className="card-body">
+                                <Table list={this.state.list} />
+                            </div>
+                        </div>
+                    </div>
+
+                    <Modal
+                        isOpen={true}
+                        handleTogglesa={() => (console.log(arguments))}
+                        titleText={'Manager'}
+                        buttonSaveText={'Save'}
+                        buttonCancelText={'Cancel'}
+                    >
+                        {/* Body Of Body */}
+                    </Modal>
+                </Content>
             </div>
         )
     }
 
-    onChangeFilterText(filterText) {
-        this.setState({ filterText })
+    handleSearch() {
+        this.props.actions.fetchAll()
     }
 
-    onSearch() {
-        if(this.state.filterText)  this.props.actions.fetchFilter(this.state.filterText)
-        else this.props.actions.fetchAll()
+    handleSearchTextChanged(searchText) {
+        this.setState({ searchText })
     }
 }
 
@@ -54,7 +82,7 @@ const mapDispatchToProps = (dispatch) => {
         actions: bindActionCreators({
             fetchAll: fetchAll,
             fetchById: fetchById,
-            fetchFilter : fetchFilter
+            fetchFilter: fetchFilter
         }, dispatch)
     }
 }
