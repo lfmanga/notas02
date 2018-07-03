@@ -4,12 +4,16 @@ import { fetchAll, fetchFilter, fetchById } from './actionsCreator'
 import { bindActionCreators } from 'redux'
 
 import Content from '../../components/layout/content'
-import Modal from '../../components/layout/modal'
+import Modal from '../../components/cliente/modal.edit'
 
 import Search from '../../components/cliente/search'
 import Table from '../../components/cliente/table'
+import Axios from 'axios';
 
-
+const initialState = {
+    list: [],
+    data: {}
+}
 
 class Cliente extends React.Component {
 
@@ -17,7 +21,11 @@ class Cliente extends React.Component {
         super(props)
         this.state = {
             list: [],
-            searchText: ''
+            searchText: '',
+            data: {
+                id: '',
+                nome: ''
+            }
         }
     }
 
@@ -48,14 +56,11 @@ class Cliente extends React.Component {
                     </div>
 
                     <Modal
-                        isOpen={true}
-                        handleTogglesa={() => (console.log(arguments))}
-                        titleText={'Manager'}
-                        buttonSaveText={'Save'}
-                        buttonCancelText={'Cancel'}
-                    >
-                        {/* Body Of Body */}
-                    </Modal>
+                        isOpen={false}
+                        data={this.state.data}
+                        handleTextChanged={this.handleTextChanged.bind(this)}
+                        handleButtonSave={this.handleButtonSave.bind(this)}
+                    />
                 </Content>
             </div>
         )
@@ -67,6 +72,25 @@ class Cliente extends React.Component {
 
     handleSearchTextChanged(searchText) {
         this.setState({ searchText })
+    }
+
+    handleTextChanged(e) {
+        let data = this.state.data
+        data[e.target.name] = e.target.value
+        this.setState({ data })
+    }
+
+    handleButtonSave() {
+        let data = this.state.data
+        Axios.post('http://localhost:5000/api/cliente'
+            , data
+            , {
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            }).then((response) => {
+                console.log(response)
+            })
     }
 }
 

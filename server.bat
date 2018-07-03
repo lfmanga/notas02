@@ -1,2 +1,6 @@
-dotnet run -p src\notas02-dotnetcore-app\Web\Notas02.WebApi\Notas02.WebApi.csproj
+cd src
+cd notas02-dotnetcore-app
+cd Web
+cd Notas02.WebApi
+dotnet run -p Notas02.WebApi.csproj
 pause

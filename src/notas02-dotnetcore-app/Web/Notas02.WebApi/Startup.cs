@@ -27,7 +27,10 @@ namespace Notas02.WebApi
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAllOrigin",
-                    builder => builder.WithOrigins("*"));
+                    builder => builder
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader());
             });
             services.AddNotas02Application(Configuration);
             services.AddSwaggerGen(options =>
