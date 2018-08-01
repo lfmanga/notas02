@@ -16,6 +16,8 @@
     <ProjectReference Include="..\Notas02.Application.Entities\Notas02.Application.Entities.csproj" />
     <ProjectReference Include="..\Notas02.Application.Core\Notas02.Application.Core.csproj" />
     <ProjectReference Include="..\Notas02.Application.Data.Dapper\Notas02.Application.Data.Dapper.csproj" />
+    <ProjectReference Include="..\Notas02.Application.UserManager.Identity\Notas02.Application.UserManager.Identity.csproj" />
+    <ProjectReference Include="..\Notas02.Application.UserManager\Notas02.Application.UserManager.csproj" />
   </ItemGroup>
 
 </Project>

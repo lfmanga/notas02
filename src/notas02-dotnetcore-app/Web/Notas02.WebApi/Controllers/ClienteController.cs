@@ -5,9 +5,11 @@ using Notas02.Application.Cliente.Commands;
 using Models = Notas02.Application.Entities;
 using System;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Notas02.WebApi.Controllers
 {
+    [Authorize("Bearer")]
     [EnableCors("AllowAllOrigin")]
     [Route("api/[controller]")]
     public class ClienteController : Controller

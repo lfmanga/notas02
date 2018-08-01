@@ -1,9 +1,8 @@
+using Dapper;
+using Notas02.Application.Core.Contracts.Repository;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Data;
-using Notas02.Application.Core.Contracts.Repository;
-using Dapper;
 using System.Linq;
 
 namespace Notas02.Application.Data.Dapper

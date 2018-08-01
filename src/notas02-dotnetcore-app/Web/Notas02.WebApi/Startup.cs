@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Notas02.Application;
+using Notas02.Application.UserManager.Identity.Models;
 using Swashbuckle.AspNetCore.Swagger;
+using System.Collections.Generic;
 
 namespace Notas02.WebApi
 {
@@ -41,9 +38,22 @@ namespace Notas02.WebApi
                     Version = "v1",
                     Description = "Controle Simples de Notas de Reembolso"
                 });
+                var security = new Dictionary<string, IEnumerable<string>>
+                {
+                    {"Bearer", new string[] { }},
+                };
+                options.AddSecurityRequirement(security);
+                options.AddSecurityDefinition("Bearer", new ApiKeyScheme
+                {
+                    Description = "JWT Authorization",
+                    Name = "Authorization",
+                    In = "header",
+                    Type = "apiKey"
+                });
             });
         }
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, UserManager<Notas02User> userManager, RoleManager<IdentityRole> roleManager)
         {
             if (env.IsDevelopment())
             {
@@ -51,7 +61,7 @@ namespace Notas02.WebApi
             }
             app.UseMvc();
             app.UseCors("AllowAllOrigin");
-            app.UseNotas02Application();
+            app.UseNotas02Application(userManager, roleManager);
             app
                 .UseSwagger()
                 .UseSwaggerUI(options =>
