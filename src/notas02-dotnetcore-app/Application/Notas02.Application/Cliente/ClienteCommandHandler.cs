@@ -1,12 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 using MediatR;
 using Notas02.Application.Cliente.Commands;
 using Notas02.Application.Cliente.Validators;
 using Notas02.Application.Core.Contracts.Repository;
 using Notas02.Application.Core.Notifications;
+using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using Models = Notas02.Application.Entities;
 
 namespace Notas02.Application.Cliente
@@ -57,7 +57,7 @@ namespace Notas02.Application.Cliente
 
             if (result.IsValid)
             {
-                _writeRepository.Add(new Models.Cliente(Guid.Empty, request.Nome));
+                _writeRepository.Edit(new Models.Cliente(request.Id, request.Nome));
                 return Task.FromResult((Notas02Notification)new Notas02SuccessNotification());
             }
 
@@ -69,9 +69,9 @@ namespace Notas02.Application.Cliente
             return Task.FromResult((Notas02Notification)new Notas02ErrorNotification(results));
         }
 
-        public Task<Notas02Notification> Handle(DeletarClienteCommand command, CancellationToken cancellationToken)
+        public Task<Notas02Notification> Handle(DeletarClienteCommand request, CancellationToken cancellationToken)
         {
-            _writeRepository.Delete(command.Id);
+            _writeRepository.Delete(request.Id);
             return Task.FromResult((Notas02Notification)new Notas02SuccessNotification());
         }
 

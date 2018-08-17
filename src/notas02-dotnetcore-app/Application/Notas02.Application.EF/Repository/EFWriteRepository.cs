@@ -30,7 +30,7 @@ namespace Notas02.Application.EF.Repository
             _context.SaveChanges();
         }
 
-        public void Edit(Guid id, T entity)
+        public void Edit(T entity)
         {
             _dbSet.Update(entity);
             _context.SaveChanges();            

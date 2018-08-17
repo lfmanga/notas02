@@ -1,11 +1,11 @@
 using MediatR;
-using Microsoft.AspNetCore.Mvc;
-using Notas02.Application.Core.Contracts.Repository;
-using Notas02.Application.Cliente.Commands;
-using Models = Notas02.Application.Entities;
-using System;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
+using Notas02.Application.Cliente.Commands;
+using Notas02.Application.Core.Contracts.Repository;
+using System;
+using Models = Notas02.Application.Entities;
 
 namespace Notas02.WebApi.Controllers
 {
@@ -26,21 +26,21 @@ namespace Notas02.WebApi.Controllers
         [HttpGet]
         public IActionResult Get() => Ok(_readRepository.List());
 
-        [HttpGet("Guid:id")]
-        public IActionResult Get(Guid id) => Ok(_readRepository.GetById(id));
+        [HttpGet("{id}")]
+        public IActionResult Get([FromRoute]Guid id) => Ok(_readRepository.GetById(id));
 
         [HttpPost]
         public IActionResult Post([FromBody]RegistrarClienteCommand cliente) => Ok(_mediator.Send(cliente).Result);
 
-        [HttpPut("Guid:id")]
-        public IActionResult Put(Guid id, [FromBody] EditarClienteCommand cliente)
+        [HttpPut("{id}")]
+        public IActionResult Put([FromRoute]Guid id, [FromBody] EditarClienteCommand cliente)
         {
             cliente.Id = id;
             return Ok(_mediator.Send(cliente).Result);
         }
 
-        [HttpDelete("Guid:id")]
-        public IActionResult Delete(Guid id)
+        [HttpDelete("{id}")]
+        public IActionResult Delete([FromRoute]Guid id)
         {
             var command = new DeletarClienteCommand(id);
             return Ok(_mediator.Send(command));
