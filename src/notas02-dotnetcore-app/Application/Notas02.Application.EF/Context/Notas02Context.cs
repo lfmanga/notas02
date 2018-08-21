@@ -12,6 +12,7 @@ namespace Notas02.Application.EF.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new ClienteMap());
+            modelBuilder.ApplyConfiguration(new NotaMap());
             base.OnModelCreating(modelBuilder);
         }
 

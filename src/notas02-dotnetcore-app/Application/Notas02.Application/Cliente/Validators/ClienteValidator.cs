@@ -1,5 +1,4 @@
 using FluentValidation;
-using Notas02.Application.Cliente.Commands;
 using Models = Notas02.Application.Entities;
 
 namespace Notas02.Application.Cliente.Validators

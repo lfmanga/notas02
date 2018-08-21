@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Notas02.Application.UserManager.Identity.Context;
 using Notas02.Application.UserManager.Identity.Models;
 using System;
 

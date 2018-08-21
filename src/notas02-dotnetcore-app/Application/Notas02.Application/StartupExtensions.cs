@@ -26,7 +26,9 @@ namespace Notas02.Application
             return services;
         }
 
-        public static IApplicationBuilder UseNotas02Application(this IApplicationBuilder app, UserManager<Notas02User> userManager, RoleManager<IdentityRole> roleManager)
+        public static IApplicationBuilder UseNotas02Application(this IApplicationBuilder app
+            , UserManager<Notas02User> userManager
+            , RoleManager<IdentityRole> roleManager)
         {
             app.UseUserManager(userManager, roleManager);
             return app;
