@@ -10,6 +10,7 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Principal;
+using System.Threading.Tasks;
 
 namespace Notas02.WebApi.Controllers
 {
@@ -86,6 +87,21 @@ namespace Notas02.WebApi.Controllers
                     message = "Falha ao autenticar"
                 };
             }
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("/signin-google")]
+        public async Task<IActionResult> SignInGoogle(object p, [FromServices]SignInManager<Notas02User> signInManager)
+        {
+            //var info = await signInManager.GetExternalLoginInfoAsync();
+            //var result = await signInManager.ExternalLoginSignInAsync(
+            //        info.LoginProvider
+            //        , info.ProviderKey
+            //        , isPersistent: false
+            //        , bypassTwoFactor: true);
+            //return Ok(result);  
+            return await Task.FromResult(Ok());
         }
     }
 }

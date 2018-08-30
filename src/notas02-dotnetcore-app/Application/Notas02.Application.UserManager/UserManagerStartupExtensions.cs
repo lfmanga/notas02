@@ -42,6 +42,12 @@ namespace Notas02.Application.UserManager
                     .RequireAuthenticatedUser().Build());
             });
 
+            services.AddAuthentication().AddGoogle(googleOptions =>
+            {
+                googleOptions.ClientId = "1093397758825-arnemikov0nc8i2v8gqt702n9efn1h6c.apps.googleusercontent.com";
+                googleOptions.ClientSecret = "khmduMMWOOwnBk9EB8FL8QVO";
+            });
+
             return services;
         }
 
